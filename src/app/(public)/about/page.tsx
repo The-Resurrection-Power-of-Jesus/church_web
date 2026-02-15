@@ -1,4 +1,15 @@
+import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Learn about Yetinsaie Hayil Church, our history, mission, and vision for the future.",
+  alternates: {
+    canonical: "/about",
+  },
+  keywords: ["about", "church history", "mission", "vision", "Paris"],
+};
 
 export default function AboutPage() {
   return (
@@ -20,57 +31,38 @@ export default function AboutPage() {
                   Our Story
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-
-የትንሳኤው ሃይል ቤተክርስትያን-ፈረንሳይ
-ቤተክርስትያናችን በሜይ 30/2019 በፈረንሳይ ፓሪስ ከተማ ተመስርታ የመጀመርያው መንፈሳዊ ፕሮግራም እሁድ ጁን 2/2019 ተካሂዶአል። ቤተክርስትያኒቱ ፔንቴኮስታል (Pentecostal) ቤተክርስትያን ስትሆን ከተለያዩ ሌሎች ቤተክርስትያናት ጋር በወንጌል አብሮ በመስራት የምታምን ናት። 
-
-መልእክተኝነታችን (አላማችን)
-አንድና ብቸኛ በሆነው በኤፌሶን 1፥9-10 በተጠቀሰው አለምን በክርስቶስ መጠቅለል በሚለው የእ/ር ራእይ ውስጥ የክርስቶስ ህይወትና የትንሳኤውን ሃይል መግለጥ ነው።
-
-
-
-
+                  የትንሳኤው ሃይል ቤተክርስትያን-ፈረንሳይ ቤተክርስትያናችን በሜይ 30/2019 በፈረንሳይ ፓሪስ
+                  ከተማ ተመስርታ የመጀመርያው መንፈሳዊ ፕሮግራም እሁድ ጁን 2/2019 ተካሂዶአል። ቤተክርስትያኒቱ
+                  ፔንቴኮስታል (Pentecostal) ቤተክርስትያን ስትሆን ከተለያዩ ሌሎች ቤተክርስትያናት ጋር
+                  በወንጌል አብሮ በመስራት የምታምን ናት። መልእክተኝነታችን (አላማችን) አንድና ብቸኛ በሆነው
+                  በኤፌሶን 1፥9-10 በተጠቀሰው አለምን በክርስቶስ መጠቅለል በሚለው የእ/ር ራእይ ውስጥ የክርስቶስ
+                  ህይወትና የትንሳኤውን ሃይል መግለጥ ነው።
                 </p>
-                
               </div>
 
               <div>
-  <h2 className="font-serif text-3xl font-semibold mb-4">
-    ተልእኮ (Mission)
-  </h2>
+                <h2 className="font-serif text-3xl font-semibold mb-4">
+                  ተልእኮ (Mission)
+                </h2>
 
-  <ol className="list-decimal list-inside space-y-3 text-muted-foreground leading-relaxed">
-    <li>
-      አማኞች በእ/ር ቃል የታነጹ እንዲሆኑ መሰረታቸውን የሚያጸኑ ትምህርቶችና ስብከቶችን መስጠት፣
-    </li>
-    <li>
-      ክርስቶስን መምሰል ማእከል ያደረጉ ትምህርቶችንና ስብከቶችን መስጠት፣
-    </li>
-    <li>
-      አማኞች የእ/ርን ፈቃድ አውቀው የህይወታቸው መርህ እንዲያደርጉት ማነጽ፣
-    </li>
-    <li>
-      አማኞች በሚኖሩበት ማህበረሰብ ውስጥ የክርስቶስ ደቀመዝሙር ሆነው ተጽእኖ ፈጣሪ እንዲሆኑ ማነጽ፣
-    </li>
-    <li>
-      አማኞች የክርስትና እሴቶችን — እምነትን፣ ፍቅርን፣ ጸድቅን፣ ቅድስናን፣ እ/ር መፍራትን — እርስ በእርሳቸው እንዲያሳዩ ማነጽ፣
-    </li>
-    <li>
-      የክርስትና የክብር ህይወት በአማኝ ህይወት ውስጥ በመንፈስ ቅዱስ እንዲገለጥ ማነጽ፣
-    </li>
-    <li>
-      በመንፈስ ቅዱስ የጸጋ መገለጥ በፈውስ፣ ሃይልን በማካፈል፣ በነጻ ማውጣት ማገልገል፣
-    </li>
-    <li>
-      ለማያምኑ የክርስቶስን ወንጌል መመስከር፣
-    </li>
-  </ol>
-</div>
-
-
-           
-                    
-             
+                <ol className="list-decimal list-inside space-y-3 text-muted-foreground leading-relaxed">
+                  <li>
+                    አማኞች በእ/ር ቃል የታነጹ እንዲሆኑ መሰረታቸውን የሚያጸኑ ትምህርቶችና ስብከቶችን መስጠት፣
+                  </li>
+                  <li>ክርስቶስን መምሰል ማእከል ያደረጉ ትምህርቶችንና ስብከቶችን መስጠት፣</li>
+                  <li>አማኞች የእ/ርን ፈቃድ አውቀው የህይወታቸው መርህ እንዲያደርጉት ማነጽ፣</li>
+                  <li>
+                    አማኞች በሚኖሩበት ማህበረሰብ ውስጥ የክርስቶስ ደቀመዝሙር ሆነው ተጽእኖ ፈጣሪ እንዲሆኑ ማነጽ፣
+                  </li>
+                  <li>
+                    አማኞች የክርስትና እሴቶችን — እምነትን፣ ፍቅርን፣ ጸድቅን፣ ቅድስናን፣ እ/ር መፍራትን —
+                    እርስ በእርሳቸው እንዲያሳዩ ማነጽ፣
+                  </li>
+                  <li>የክርስትና የክብር ህይወት በአማኝ ህይወት ውስጥ በመንፈስ ቅዱስ እንዲገለጥ ማነጽ፣</li>
+                  <li>በመንፈስ ቅዱስ የጸጋ መገለጥ በፈውስ፣ ሃይልን በማካፈል፣ በነጻ ማውጣት ማገልገል፣</li>
+                  <li>ለማያምኑ የክርስቶስን ወንጌል መመስከር፣</li>
+                </ol>
+              </div>
             </div>
           </div>
         </div>

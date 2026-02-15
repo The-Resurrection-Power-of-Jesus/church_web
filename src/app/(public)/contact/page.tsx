@@ -1,5 +1,16 @@
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Contact Yetinsaie Hayil Church in Paris for questions, prayer, and community support.",
+  alternates: {
+    canonical: "/contact",
+  },
+  keywords: ["contact", "church", "Paris", "address", "phone", "email"],
+};
 
 export default function ContactPage() {
   return (
