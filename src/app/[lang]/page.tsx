@@ -1,12 +1,14 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { format } from "date-fns";
 import { BookOpen, Calendar, Heart, Users } from "lucide-react";
-import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Hero } from "@/components/custom/hero";
 import { HomepageCarousel } from "@/components/custom/homepage-photos";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { isLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
 import {
   type DailyDevotionalLocalized,
   devotionalForDateQuery,
@@ -14,24 +16,10 @@ import {
 } from "@/sanity/lib/devotionals";
 import { sanityFetch } from "@/sanity/lib/live";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-  keywords: [
-    "church",
-    "Ethiopian church",
-    "Paris",
-    "worship",
-    "community",
-    "services",
-  ],
-};
-
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
-      <p className="text-sm text-muted-foreground leading-relaxed">
+      <p className="text-sm leading-relaxed text-muted-foreground">
         {children}
       </p>
     ),
@@ -45,25 +33,34 @@ const formatDate = (value?: string) => {
   return format(parsed, "MMMM d, yyyy");
 };
 
-export default async function Home() {
-  const lang = "en";
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params; // ✅ unwrap params
+  if (!isLocale(lang)) notFound();
+
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale);
+  const basePath = `/${lang}`;
+
   const today = new Date().toISOString().split("T")[0];
   const { data: devotionalToday } = await sanityFetch({
     query: devotionalForDateQuery,
-    params: { date: today, lang },
+    params: { date: today, lang: locale },
   });
   const { data: latestDevotional } = await sanityFetch({
     query: latestDevotionalQuery,
-    params: { lang },
+    params: { lang: locale },
   });
   const devotional =
     (devotionalToday as DailyDevotionalLocalized | null) ??
     (latestDevotional as DailyDevotionalLocalized | null);
   const devotionalBody = Array.isArray(devotional?.body) ? devotional.body : [];
   const devotionalPreview = devotionalBody.slice(0, 1);
-
   return (
-    <main className="flex-1 min-h-screen bg-gradient-to-b from-blue-80 via-blue-50 to-blue-40">
+    <main className="flex-1 min-h-screen bg-linear-to-b from-blue-80 via-blue-50 to-blue-40">
       {/* Hero Section */}
       <Hero />
       <section className="relative py-20 md:py-32 bg-transparent">
@@ -76,16 +73,16 @@ export default async function Home() {
               A community devoted to worship, fellowship, and growing in faith
               together. Join us as we seek to honor God and serve one another.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col gap-4 sm:flex-row justify-center">
               <Button
                 asChild
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90"
               >
-                <Link href="/events">View Upcoming Events</Link>
+                <Link href={`${basePath}/events`}>View Upcoming Events</Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link href="/about">Learn More About Us</Link>
+                <Link href={`${basePath}/about`}>Learn More About Us</Link>
               </Button>
             </div>
           </div>
@@ -93,15 +90,15 @@ export default async function Home() {
       </section>
 
       {devotional ? (
-        <section className="py-16 bg-transparent">
+        <section className="bg-transparent py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+            <div className="mx-auto max-w-4xl">
+              <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground mb-2">
-                    Today's Devotional
+                  <p className="mb-2 text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                    Today&apos;s Devotional
                   </p>
-                  <h2 className="font-serif text-3xl md:text-4xl font-semibold">
+                  <h2 className="font-serif text-3xl font-semibold md:text-4xl">
                     Nourishment for Today
                   </h2>
                 </div>
@@ -112,10 +109,10 @@ export default async function Home() {
               </div>
               <Card className="bg-card border-border">
                 <CardContent className="p-6 md:p-8">
-                  <h3 className="font-serif text-2xl font-semibold mb-3">
+                  <h3 className="mb-3 font-serif text-2xl font-semibold">
                     {devotional.title || "Untitled devotional"}
                   </h3>
-                  <div className="text-sm text-muted-foreground leading-relaxed mb-6 line-clamp-4">
+                  <div className="mb-6 text-sm leading-relaxed text-muted-foreground line-clamp-4">
                     {devotionalPreview.length > 0 ? (
                       <PortableText
                         value={devotionalPreview}
@@ -125,7 +122,7 @@ export default async function Home() {
                       <p>No devotional text available yet.</p>
                     )}
                   </div>
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     {devotional.author ? (
                       <div className="text-sm text-muted-foreground">
                         By {devotional.author}
@@ -134,7 +131,9 @@ export default async function Home() {
                       <div />
                     )}
                     <Button asChild variant="outline">
-                      <Link href="/daily-devotions">Read full devotional</Link>
+                      <Link href={`${basePath}/daily-devotions`}>
+                        Read full devotional
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -145,7 +144,7 @@ export default async function Home() {
       ) : null}
 
       {/* Service Times */}
-      <section className="py-16 bg-transparent">
+      <section className="bg-transparent py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
@@ -200,7 +199,7 @@ export default async function Home() {
       </section>
 
       {/* Features */}
-      <section className="py-16 bg-transparent">
+      <section className="bg-transparent py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
@@ -250,7 +249,7 @@ export default async function Home() {
       <HomepageCarousel />
 
       {/* CTA Section */}
-      <section className="py-16 bg-transparent">
+      <section className="bg-transparent py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
@@ -265,7 +264,7 @@ export default async function Home() {
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              <Link href="/contact">Get in Touch</Link>
+              <Link href={`${basePath}/contact`}>Get in Touch</Link>
             </Button>
           </div>
         </div>

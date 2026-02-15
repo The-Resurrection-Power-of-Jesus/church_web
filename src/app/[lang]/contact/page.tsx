@@ -1,55 +1,57 @@
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
-import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
+import { isLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description:
-    "Contact Yetinsaie Hayil Church in Paris for questions, prayer, and community support.",
-  alternates: {
-    canonical: "/contact",
-  },
-  keywords: ["contact", "church", "Paris", "address", "phone", "email"],
-};
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
 
-export default function ContactPage() {
+  const locale = lang as Locale;
+  await getDictionary(locale);
+
   return (
     <main className="flex-1">
-      <section className="py-16 md:py-24 bg-linear-to-b from-muted/50 to-background">
+      <section className="bg-linear-to-b from-muted/50 to-background py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="font-serif text-4xl md:text-5xl font-semibold text-center mb-6">
+          <div className="mx-auto max-w-4xl">
+            <h1 className="mb-6 text-center font-serif text-4xl font-semibold md:text-5xl">
               Contact Us
             </h1>
-            <p className="text-lg text-center text-muted-foreground mb-12 leading-relaxed">
+            <p className="mb-12 text-center text-lg leading-relaxed text-muted-foreground">
               We&apos;d love to hear from you. Reach out with any questions or
               to learn more about our church.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
               <Card className="bg-card border-border">
-                <CardContent className="p-6 flex items-start space-x-4">
-                  <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <CardContent className="flex items-start space-x-4 p-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                     <MapPin className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Address</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <h3 className="mb-1 font-semibold">Address</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
                       5 Rue de la Noue, 93170
                       <br />
-                      Bagnolet,France
+                      Bagnolet, France
                     </p>
                   </div>
                 </CardContent>
               </Card>
 
               <Card className="bg-card border-border">
-                <CardContent className="p-6 flex items-start space-x-4">
-                  <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <CardContent className="flex items-start space-x-4 p-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                     <Phone className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Phone</h3>
+                    <h3 className="mb-1 font-semibold">Phone</h3>
                     <p className="text-sm text-muted-foreground">
                       +33643924927
                     </p>
@@ -58,12 +60,12 @@ export default function ContactPage() {
               </Card>
 
               <Card className="bg-card border-border">
-                <CardContent className="p-6 flex items-start space-x-4">
-                  <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <CardContent className="flex items-start space-x-4 p-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Email</h3>
+                    <h3 className="mb-1 font-semibold">Email</h3>
                     <p className="text-sm text-muted-foreground">
                       info@ethiopianchurch.org
                     </p>
@@ -72,13 +74,13 @@ export default function ContactPage() {
               </Card>
 
               <Card className="bg-card border-border">
-                <CardContent className="p-6 flex items-start space-x-4">
-                  <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                <CardContent className="flex items-start space-x-4 p-6">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10">
                     <Clock className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1">Office Hours</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <h3 className="mb-1 font-semibold">Office Hours</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
                       Monday - Friday
                       <br />
                       9:00 AM - 5:00 PM
@@ -90,15 +92,15 @@ export default function ContactPage() {
 
             <Card className="bg-card border-border">
               <CardContent className="p-8">
-                <h2 className="font-serif text-2xl font-semibold mb-6">
+                <h2 className="mb-6 font-serif text-2xl font-semibold">
                   Send Us a Message
                 </h2>
                 <form className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div>
                       <label
                         htmlFor="name"
-                        className="block text-sm font-medium mb-2"
+                        className="mb-2 block text-sm font-medium"
                       >
                         Name
                       </label>
@@ -106,14 +108,14 @@ export default function ContactPage() {
                         type="text"
                         id="name"
                         name="name"
-                        className="w-full px-4 py-2 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                        className="w-full rounded-md border border-input bg-background px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                         placeholder="Your name"
                       />
                     </div>
                     <div>
                       <label
                         htmlFor="email"
-                        className="block text-sm font-medium mb-2"
+                        className="mb-2 block text-sm font-medium"
                       >
                         Email
                       </label>
@@ -121,7 +123,7 @@ export default function ContactPage() {
                         type="email"
                         id="email"
                         name="email"
-                        className="w-full px-4 py-2 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                        className="w-full rounded-md border border-input bg-background px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                         placeholder="your@email.com"
                       />
                     </div>
@@ -129,7 +131,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="subject"
-                      className="block text-sm font-medium mb-2"
+                      className="mb-2 block text-sm font-medium"
                     >
                       Subject
                     </label>
@@ -137,14 +139,14 @@ export default function ContactPage() {
                       type="text"
                       id="subject"
                       name="subject"
-                      className="w-full px-4 py-2 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="w-full rounded-md border border-input bg-background px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="How can we help?"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="message"
-                      className="block text-sm font-medium mb-2"
+                      className="mb-2 block text-sm font-medium"
                     >
                       Message
                     </label>
@@ -152,13 +154,13 @@ export default function ContactPage() {
                       id="message"
                       name="message"
                       rows={6}
-                      className="w-full px-4 py-2 rounded-md border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                      className="w-full resize-none rounded-md border border-input bg-background px-4 py-2 text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="Your message..."
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full md:w-auto px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+                    className="w-full rounded-md bg-primary px-6 py-2 text-primary-foreground transition-colors hover:bg-primary/90 md:w-auto"
                   >
                     Send Message
                   </button>

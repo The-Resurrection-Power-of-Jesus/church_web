@@ -1,38 +1,36 @@
-import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { DailyDevotionsList } from "@/components/custom/daily-devotions-list";
+import { isLocale, type Locale } from "@/i18n/config";
 import {
   type DailyDevotionalLocalized,
   devotionalsByLocaleQuery,
 } from "@/sanity/lib/devotionals";
 import { sanityFetch } from "@/sanity/lib/live";
 
-export const metadata: Metadata = {
-  title: "Daily Devotions",
-  description:
-    "Read daily scripture, reflections, and teachings to strengthen your faith and walk with God.",
-  alternates: {
-    canonical: "/daily-devotions",
-  },
-  keywords: ["daily devotions", "scripture", "reflections", "faith"],
-};
+export default async function DailyDevotionsPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
 
-export default async function DailyDevotionsPage() {
-  const lang = "en";
+  const locale = lang as Locale;
   const { data } = await sanityFetch({
     query: devotionalsByLocaleQuery,
-    params: { lang },
+    params: { lang: locale },
   });
   const devotionals = (data as DailyDevotionalLocalized[]) ?? [];
 
   return (
     <main className="flex-1">
-      <section className="py-16 md:py-24 bg-linear-to-b from-muted/50 to-background">
+      <section className="bg-linear-to-b from-muted/50 to-background py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto">
-            <h1 className="font-serif text-4xl md:text-5xl font-semibold text-center mb-6">
+          <div className="mx-auto max-w-5xl">
+            <h1 className="mb-6 text-center font-serif text-4xl font-semibold md:text-5xl">
               Daily Devotions
             </h1>
-            <p className="text-lg text-center text-muted-foreground mb-12 leading-relaxed">
+            <p className="mb-12 text-center text-lg leading-relaxed text-muted-foreground">
               Daily scripture, reflections, and teachings to strengthen your
               faith.
             </p>

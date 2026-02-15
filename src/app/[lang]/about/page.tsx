@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
+import { notFound } from "next/navigation";
+import { getDictionary } from "@/i18n/getDictionary";
+import { isLocale, type Locale } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: "About",
-  description:
-    "Learn about Yetinsaie Hayil Church, our history, mission, and vision for the future.",
-  alternates: {
-    canonical: "/about",
-  },
-  keywords: ["about", "church history", "mission", "vision", "Paris"],
-};
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+  const { lang } = await params; // ✅ unwrap params
+  if (!isLocale(lang)) notFound();
 
-export default function AboutPage() {
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale);
+
   return (
     <main className="flex-1">
       <section className="py-16 md:py-24 bg-linear-to-b from-muted/50 to-background">

@@ -1,6 +1,8 @@
-import { Menu } from "lucide-react";
+import { Languages, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import LanguageSwitcher from "@/components/custom/language-switcher";
+import MobileLanguageLinksClient from "@/components/custom/mobile-language-links-client";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -8,22 +10,37 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import type { Locale } from "@/i18n/config";
 
-export default function Header() {
+export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
   const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Statement of Faith", href: "/statement-of-faith" },
-    { name: "About Us", href: "/about" },
-    { name: "Daily Devotions", href: "/daily-devotions" },
-    { name: "Events", href: "/events" },
-    { name: "Contact", href: "/contact" },
+    { name: dict?.nav?.home ?? "Home", href: `/${lang}` },
+    {
+      name: dict?.nav?.statementOfFaith ?? "Statement of Faith",
+      href: `/${lang}/statement-of-faith`,
+    },
+    { name: dict?.nav?.about ?? "About Us", href: `/${lang}/about` },
+    {
+      name: dict?.nav?.dailyDevotions ?? "Daily Devotions",
+      href: `/${lang}/daily-devotions`,
+    },
+    { name: dict?.nav?.blogs ?? "Blogs", href: `/${lang}/blogs` },
+    { name: dict?.nav?.events ?? "Events", href: `/${lang}/events` },
+    { name: dict?.nav?.contact ?? "Contact", href: `/${lang}/contact` },
   ];
+
+  const languageLabel = dict?.language?.label ?? "Language";
+  const languageNameByLocale: Record<Locale, string> = {
+    en: dict?.language?.en ?? "English",
+    fr: dict?.language?.fr ?? "Français",
+    am: dict?.language?.am ?? "አማርኛ",
+  };
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex h-16 items-center justify-between md:h-20">
-          <Link href="/" className="flex min-w-0 items-center gap-3">
+          <Link href={`/${lang}`} className="flex min-w-0 items-center gap-3">
             <Image
               src="/logo.png"
               alt="The Power of Resurrection Church Logo"
@@ -46,13 +63,15 @@ export default function Header() {
           <nav className="hidden items-center space-x-6 lg:flex">
             {navigation.map((item) => (
               <Link
-                key={item.name}
+                key={item.href}
                 href={item.href}
                 className="font-serif text-xl font-semibold text-muted-foreground transition-colors hover:text-foreground"
               >
                 {item.name}
               </Link>
             ))}
+
+            <LanguageSwitcher lang={lang} dict={dict} />
           </nav>
 
           {/* Mobile Navigation */}
@@ -65,16 +84,24 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent className="w-72">
               <SheetTitle className="sr-only">Site navigation</SheetTitle>
-              <nav className="flex flex-col space-y-4 mt-8">
+              <nav className="mt-8 flex flex-col space-y-4">
                 {navigation.map((item) => (
                   <Link
-                    key={item.name}
+                    key={item.href}
                     href={item.href}
                     className="text-lg text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {item.name}
                   </Link>
                 ))}
+
+                <div className="border-t pt-6">
+                  <p className="mb-3 flex items-center gap-2 text-sm font-medium">
+                    <Languages className="h-4 w-4" />
+                    {languageLabel}
+                  </p>
+                  <MobileLanguageLinks nameByLocale={languageNameByLocale} />
+                </div>
               </nav>
             </SheetContent>
           </Sheet>
@@ -82,4 +109,14 @@ export default function Header() {
       </div>
     </header>
   );
+}
+
+/** Mobile: simple links that also keep current path */
+function MobileLanguageLinks({
+  nameByLocale,
+}: {
+  nameByLocale: Record<Locale, string>;
+}) {
+  // This component must be client to read pathname, so we delegate:
+  return <MobileLanguageLinksClient nameByLocale={nameByLocale} />;
 }
