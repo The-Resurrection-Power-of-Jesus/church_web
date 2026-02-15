@@ -69,6 +69,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.2.0
         version: 2.2.0
+      '@portabletext/types':
+        specifier: ^4.0.1
+        version: 4.0.1
       '@tailwindcss/postcss':
         specifier: ^4
         version: 4.1.18
@@ -1756,10 +1759,6 @@ packages:
 
   '@portabletext/toolkit@5.0.1':
     resolution: {integrity: sha512-qcwnWd15J2Ziwi0YfWHRx+DRqp87cPb+EBcYuEbDW0ChZwwxCdfIjDazzFpQeXnqhJn8own1c8UB3iHB61DiWg==}
-    engines: {node: '>=20.19 <22 || >=22.12'}
-
-  '@portabletext/types@4.0.0':
-    resolution: {integrity: sha512-mEoN82OQckrshqRx8idp+x8B/OpMfUMSjQp1w1wZFM3hf8cplGhK59Sa/UuGU6XdgAnFq90vJtnj5ejOmZmhvw==}
     engines: {node: '>=20.19 <22 || >=22.12'}
 
   '@portabletext/types@4.0.1':
@@ -7268,17 +7267,15 @@ snapshots:
   '@portabletext/to-html@5.0.0':
     dependencies:
       '@portabletext/toolkit': 5.0.0
-      '@portabletext/types': 4.0.0
+      '@portabletext/types': 4.0.1
 
   '@portabletext/toolkit@5.0.0':
     dependencies:
-      '@portabletext/types': 4.0.0
+      '@portabletext/types': 4.0.1
 
   '@portabletext/toolkit@5.0.1':
     dependencies:
       '@portabletext/types': 4.0.1
-
-  '@portabletext/types@4.0.0': {}
 
   '@portabletext/types@4.0.1': {}
 
