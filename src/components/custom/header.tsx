@@ -21,10 +21,13 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
     },
     { name: dict?.nav?.about ?? "About Us", href: `/${lang}/about` },
     {
-      name: dict?.nav?.dailyDevotions ?? "Daily Devotions",
-      href: `/${lang}/daily-devotions`,
+      name: dict?.nav?.dailyDevotion ?? "Daily Devotions",
+      href: `/${lang}/daily-devotion`,
     },
-    { name: dict?.nav?.blogs ?? "Blogs", href: `/${lang}/blogs` },
+    {
+      name: dict?.nav?.donation ?? "Donations",
+      href: `/${lang}/donation`,
+    },
     { name: dict?.nav?.events ?? "Events", href: `/${lang}/events` },
     { name: dict?.nav?.contact ?? "Contact", href: `/${lang}/contact` },
   ];
@@ -38,7 +41,7 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container max-w-full mx-auto sm:px-6">
         <div className="flex h-16 items-center justify-between md:h-20">
           <Link href={`/${lang}`} className="flex min-w-0 items-center gap-3">
             <Image

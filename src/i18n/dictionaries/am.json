@@ -1,27 +1,29 @@
 {
     "nav": {
-      "home": "መነሻ",
-      "about": "ስለ እኛ",
-      "blogs": "ብሎጎች",
-      "events": "ዝግጅቶች",
-      "contact": "አግኙን",
-      "statementOfFaith": "የእምነት መግለጫ"
+        "home": "መነሻ",
+        "about": "ስለ እኛ",
+        "blogs": "ብሎጎች",
+        "events": "ዝግጅቶች",
+        "contact": "አግኙን",
+        "dailyDevotion": "ዕለታዊ አምልኮዎች",
+        "donation": "እርዳታ",
+        "statementOfFaith": "የእምነት መግለጫ"
     },
     "home": {
-      "heroTitle": "ወደ ቤተክርስቲያናችን እንኳን ደህና መጡ",
-      "heroSubtitle": "በእምነት፣ ተስፋ፣ ፍቅር ለመዳበር የሚረዳ ስፍራ።"
+        "heroTitle": "ወደ ቤተክርስቲያናችን እንኳን ደህና መጡ",
+        "heroSubtitle": "በእምነት፣ ተስፋ፣ ፍቅር ለመዳበር የሚረዳ ስፍራ።"
     },
     "footer": {
-      "rights": "መብቶች ሁሉ የተጠበቁ ናቸው።"
+        "rights": "መብቶች ሁሉ የተጠበቁ ናቸው።"
     },
     "language": {
-      "label": "ቋንቋ",
-      "en": "English",
-      "fr": "Français",
-      "am": "አማርኛ"
+        "label": "ቋንቋ",
+        "en": "English",
+        "fr": "Français",
+        "am": "አማርኛ"
     },
     "blogs": {
-  "subtitle": "Reflections, teachings, and resources to encourage your faith journey."
+        "subtitle": "Reflections, teachings, and resources to encourage your faith journey."
+    }
 }
-  }
-  
+

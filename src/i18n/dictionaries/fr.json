@@ -1,27 +1,29 @@
 {
     "nav": {
-      "home": "Accueil",
-      "about": "À propos",
-      "blogs": "Blogs",
-      "events": "Événements",
-      "contact": "Contact",
-      "statementOfFaith": "Déclaration de foi"
+        "home": "Accueil",
+        "about": "À propos",
+        "blogs": "Blogs",
+        "dailyDevotion": "Dévotions quotidiennes",
+        "donation": "Donnons",
+        "events": "Événements",
+        "contact": "Contact",
+        "statementOfFaith": "Déclaration de foi"
     },
     "home": {
-      "heroTitle": "Bienvenue dans notre Église",
-      "heroSubtitle": "Un lieu pour grandir dans la foi, l’espérance et l’amour."
+        "heroTitle": "Bienvenue dans notre Église",
+        "heroSubtitle": "Un lieu pour grandir dans la foi, l’espérance et l’amour."
     },
     "footer": {
-      "rights": "Tous droits réservés."
+        "rights": "Tous droits réservés."
     },
     "language": {
-      "label": "Langue",
-      "en": "English",
-      "fr": "Français",
-      "am": "አማርኛ"
+        "label": "Langue",
+        "en": "English",
+        "fr": "Français",
+        "am": "አማርኛ"
     },
     "blogs": {
-  "subtitle": "Reflections, teachings, and resources to encourage your faith journey."
+        "subtitle": "Reflections, teachings, and resources to encourage your faith journey."
+    }
 }
-  }
-  
+
