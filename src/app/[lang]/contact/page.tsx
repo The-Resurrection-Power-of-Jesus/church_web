@@ -1,7 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { notFound } from "next/navigation";
+import { getDictionary } from "@/i18n/getDictionary";
+import { isLocale, type Locale } from "@/i18n/config";
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+
+  const { lang } = await params; // ✅ unwrap params
+  if (!isLocale(lang)) notFound();
+
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale);
+  
   return (
     <main className="flex-1">
       <section className="py-16 md:py-24 bg-linear-to-b from-muted/50 to-background">

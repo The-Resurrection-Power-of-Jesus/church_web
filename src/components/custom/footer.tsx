@@ -1,6 +1,13 @@
 import Link from "next/link";
+import type { Locale } from "@/i18n/config";
 
-export function Footer() {
+export default function Footer({
+  lang,
+  dict,
+}: {
+  lang: Locale;
+  dict: any;
+}) {
   return (
     <footer className="border-t border-border bg-muted/30 mt-auto">
       <div className="container mx-auto px-4 py-12">

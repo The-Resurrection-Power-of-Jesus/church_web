@@ -2,7 +2,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { randomUUID } from "node:crypto";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
-export default function EventsPage() {
+import { notFound } from "next/navigation";
+import { getDictionary } from "@/i18n/getDictionary";
+import { isLocale, type Locale } from "@/i18n/config";
+
+export default async function EventsPage({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
+
+  const { lang } = await params; // ✅ unwrap params
+  if (!isLocale(lang)) notFound();
+
+  const locale = lang as Locale;
+  const dict = await getDictionary(locale);
+  
   const events = [
      {
       title: "Christmas Celebration",
@@ -58,7 +73,7 @@ export default function EventsPage() {
     
   ];
 
-  return (<main className="flex-1 min-h-screen bg-gradient-to-b">
+  return (<main className="flex-1 min-h-screen bg-linear-to-b">
   <section className="py-16 md:py-24 bg-transparent">
     <div className="container mx-auto px-4">
       <div className="max-w-5xl mx-auto">
