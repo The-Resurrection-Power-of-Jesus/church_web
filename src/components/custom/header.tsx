@@ -56,7 +56,7 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
               <span className="font-serif text-base font-semibold leading-tight text-foreground sm:text-lg md:text-2xl">
                 የትንሳኤው ሃይል ቤተ ክርስቲያን
               </span>
-              <span className="font-serif text-xs font-normal leading-tight text-primary sm:text-sm md:text-xl">
+              <span className="font-serif text-xs font-normal leading-tight text-primary sm:text-sm md:text-lg">
                 The Church of the Resurrection Power of Jesus in Paris
               </span>
             </div>
