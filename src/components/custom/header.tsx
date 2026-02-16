@@ -42,7 +42,7 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="container max-w-full sm:px-1">
-        <div className="flex h-16 max-w-full bg-amber-950 items-center justify-between md:h-20">
+        <div className="flex h-16 max-w-full items-center justify-between md:h-20">
           <Link href={`/${lang}`} className="flex min-w-0 items-center gap-3">
             <Image
               src="/logo.png"
@@ -63,7 +63,7 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center space-x-7 bg-blue-600 lg:flex">
+          <nav className="hidden items-center space-x-7 lg:flex">
             {navigation.map((item) => (
               <Link
                 key={item.href}
