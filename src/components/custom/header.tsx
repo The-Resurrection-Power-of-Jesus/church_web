@@ -63,7 +63,7 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center space-x-6 lg:flex">
+          <nav className="hidden items-center space-x-5 lg:flex">
             {navigation.map((item) => (
               <Link
                 key={item.href}
