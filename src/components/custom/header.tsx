@@ -53,7 +53,7 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
               priority
             />
             <div className="flex min-w-0 flex-col items-start">
-              <span className="font-serif text-base font-semibold leading-tight text-foreground sm:text-lg md:text-3xl">
+              <span className="font-serif text-base font-semibold leading-tight text-foreground sm:text-lg md:text-2xl">
                 የትንሳኤው ሃይል ቤተ ክርስቲያን
               </span>
               <span className="font-serif text-xs font-normal leading-tight text-primary sm:text-sm md:text-xl">
