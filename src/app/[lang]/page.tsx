@@ -8,13 +8,17 @@ import { HomepageCarousel } from "@/components/custom/homepage-photos";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { isLocale, type Locale } from "@/i18n/config";
-import { getDictionary } from "@/i18n/getDictionary";
 import {
   type DailyDevotionalLocalized,
   devotionalForDateQuery,
   latestDevotionalQuery,
 } from "@/sanity/lib/devotionals";
 import { sanityFetch } from "@/sanity/lib/live";
+
+type HomepageSettings = {
+  heroImages?: Array<{ _key?: string; asset?: unknown; alt?: string }>;
+  carouselImages?: Array<{ _key?: string; asset?: unknown; alt?: string }>;
+};
 
 const portableTextComponents: PortableTextComponents = {
   block: {
@@ -42,7 +46,6 @@ export default async function Home({
   if (!isLocale(lang)) notFound();
 
   const locale = lang as Locale;
-  const dict = await getDictionary(locale);
   const basePath = `/${lang}`;
 
   const today = new Date().toISOString().split("T")[0];
@@ -54,15 +57,31 @@ export default async function Home({
     query: latestDevotionalQuery,
     params: { lang: locale },
   });
+  const { data: homepageSettings } = await sanityFetch({
+    query:
+      '*[_type == "homepageSettings"][0]{heroImages[]{_key, asset, alt}, carouselImages[]{_key, asset, alt}}',
+  });
   const devotional =
     (devotionalToday as DailyDevotionalLocalized | null) ??
     (latestDevotional as DailyDevotionalLocalized | null);
   const devotionalBody = Array.isArray(devotional?.body) ? devotional.body : [];
   const devotionalPreview = devotionalBody.slice(0, 1);
+  const settings = homepageSettings as HomepageSettings | null;
+  const heroImages = settings?.heroImages ?? [];
+  const carouselImages = settings?.carouselImages ?? [];
+  const fallbackImages = [
+    "/home1.jpg",
+    "/home2.jpg",
+    "/home3.jpg",
+    "/home4.jpg",
+    "/home5.jpg",
+    "/kids.jpg",
+  ];
+
   return (
     <main className="flex-1 min-h-screen bg-linear-to-b from-blue-80 via-blue-50 to-blue-40">
       {/* Hero Section */}
-      <Hero />
+      <Hero images={heroImages.length ? heroImages : ["/home1.png"]} />
       <section className="relative py-20 md:py-32 bg-transparent">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
@@ -246,7 +265,9 @@ export default async function Home({
         </div>
       </section>
 
-      <HomepageCarousel />
+      <HomepageCarousel
+        images={carouselImages.length ? carouselImages : fallbackImages}
+      />
 
       {/* CTA Section */}
       <section className="bg-transparent py-16">

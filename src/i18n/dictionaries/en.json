@@ -1,28 +1,27 @@
 {
-    "nav": {
-        "home": "Home",
-        "about": "About",
-        "blogs": "Blogs",
-        "events": "Events",
-        "dailyDevotion": "Daily Devotions",
-        "donation": "Donation",
-        "contact": "Contact",
-        "statementOfFaith": "Statement of Faith"
-    },
-    "home": {
-        "heroTitle": "Welcome to Our Church",
-        "heroSubtitle": "A place to grow in faith, hope, and love."
-    },
-    "footer": {
-        "rights": "All rights reserved."
-    },
-    "language": {
-        "label": "Language",
-        "en": "English",
-        "fr": "Français",
-        "am": "አማርኛ"
-    },
-    "blogs": {
-        "subtitle": "Reflections, teachings, and resources to encourage your faith journey."
-    }
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "blogs": "Blogs",
+    "events": "Events",
+    "dailyDevotion": "Daily Devotions",
+    "donation": "Donation",
+    "contact": "Contact"
+  },
+  "home": {
+    "heroTitle": "Welcome to Our Church",
+    "heroSubtitle": "A place to grow in faith, hope, and love."
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "fr": "Français",
+    "am": "አማርኛ"
+  },
+  "blogs": {
+    "subtitle": "Reflections, teachings, and resources to encourage your faith journey."
+  }
 }

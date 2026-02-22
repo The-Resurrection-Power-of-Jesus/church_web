@@ -20,12 +20,6 @@ export default function Footer({ lang, dict }: { lang: Locale; dict: any }) {
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <nav className="flex flex-col space-y-2">
               <Link
-                href={`/${lang}/statement-of-faith`}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {dict?.nav?.statementOfFaith ?? "Statement of Faith"}
-              </Link>
-              <Link
                 href={`/${lang}/about`}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
