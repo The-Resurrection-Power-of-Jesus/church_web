@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import { useRef } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -10,25 +10,36 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { urlFor } from "@/sanity/lib/image";
 
-export function HomepageCarousel() {
+type HomepageImage = { _key?: string; asset?: unknown; alt?: string } | string;
+
+type HomepageCarouselProps = {
+  images: HomepageImage[];
+};
+
+const resolveImageSrc = (image: HomepageImage) => {
+  if (typeof image === "string") return image;
+  if (typeof image.asset === "string") return image.asset;
+  return urlFor(image).width(768).height(1280).url();
+};
+
+const resolveImageAlt = (image: HomepageImage, fallback: string) => {
+  if (typeof image === "string") return fallback;
+  return image.alt || fallback;
+};
+
+export function HomepageCarousel({ images }: HomepageCarouselProps) {
   // Autoplay plugin
   const plugin = useRef(
     Autoplay({
-      delay: 3000,           // 3 seconds per slide
+      delay: 3000, // 3 seconds per slide
       stopOnInteraction: false, // never stop if user interacts
-      stopOnMouseEnter: false,  // never stop on hover
-    })
+      stopOnMouseEnter: false, // never stop on hover
+    }),
   );
 
-  const images = [
-    "/stat1.jpg",
-    "/home2.jpg",
-    "/home3.jpg",
-    "/home4.jpg",
-    "/home5.jpg",
-    "/kids.jpg",
-  ];
+  if (!images.length) return null;
 
   return (
     <Carousel
@@ -37,15 +48,19 @@ export function HomepageCarousel() {
       className="w-full max-w-[90vw] mx-auto"
     >
       <CarouselContent className="-ml-1">
-        {images.map((src, index) => (
+        {images.map((image, index) => (
           <CarouselItem
-            key={index}
+            key={
+              typeof image === "string"
+                ? `${index}-${image}`
+                : (image._key ?? `${index}-${image.alt ?? "image"}`)
+            }
             className="pl-1 md:basis-1/2 lg:basis-1/3"
           >
             <div className="p-1">
               <Image
-                src={src}
-                alt={`Carousel image ${index + 1}`}
+                src={resolveImageSrc(image)}
+                alt={resolveImageAlt(image, `Carousel image ${index + 1}`)}
                 width={768}
                 height={1280}
                 className="aspect-video w-full h-full object-cover"

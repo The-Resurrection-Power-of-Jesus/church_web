@@ -15,10 +15,6 @@ import type { Locale } from "@/i18n/config";
 export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
   const navigation = [
     { name: dict?.nav?.home ?? "Home", href: `/${lang}` },
-    {
-      name: dict?.nav?.statementOfFaith ?? "Statement of Faith",
-      href: `/${lang}/statement-of-faith`,
-    },
     { name: dict?.nav?.about ?? "About Us", href: `/${lang}/about` },
     {
       name: dict?.nav?.dailyDevotion ?? "Daily Devotions",
