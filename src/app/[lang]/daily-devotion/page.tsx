@@ -7,7 +7,7 @@ import {
 } from "@/sanity/lib/devotionals";
 import { sanityFetch } from "@/sanity/lib/live";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function DailyDevotionsPage({
   params,

@@ -15,7 +15,7 @@ import {
 } from "@/sanity/lib/devotionals";
 import { sanityFetch } from "@/sanity/lib/live";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 type HomepageSettings = {
   heroImages?: Array<{ _key?: string; asset?: unknown; alt?: string }>;
