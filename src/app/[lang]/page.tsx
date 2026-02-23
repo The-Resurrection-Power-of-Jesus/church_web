@@ -15,6 +15,8 @@ import {
 } from "@/sanity/lib/devotionals";
 import { sanityFetch } from "@/sanity/lib/live";
 
+export const revalidate = 60;
+
 type HomepageSettings = {
   heroImages?: Array<{ _key?: string; asset?: unknown; alt?: string }>;
   carouselImages?: Array<{ _key?: string; asset?: unknown; alt?: string }>;

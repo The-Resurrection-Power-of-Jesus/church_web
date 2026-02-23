@@ -9,6 +9,8 @@ import { type EventLocalized, eventsByLocaleQuery } from "@/sanity/lib/events";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
 
+export const revalidate = 60;
+
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
