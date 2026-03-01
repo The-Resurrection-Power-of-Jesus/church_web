@@ -47,6 +47,45 @@ export const event = defineType({
       ],
     }),
     defineField({
+      name: "media",
+      title: "Media",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt Text",
+              type: "string",
+            }),
+          ],
+        },
+        defineField({
+          name: "youtube",
+          title: "YouTube Video",
+          type: "object",
+          fields: [
+            defineField({
+              name: "url",
+              title: "YouTube URL",
+              type: "url",
+              validation: (Rule) =>
+                Rule.uri({
+                  scheme: ["https", "http"],
+                }),
+            }),
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "string",
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: "recurring",
       title: "Recurring",
       type: "boolean",
