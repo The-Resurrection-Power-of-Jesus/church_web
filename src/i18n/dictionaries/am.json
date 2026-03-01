@@ -23,5 +23,12 @@
   },
   "blogs": {
     "subtitle": "Reflections, teachings, and resources to encourage your faith journey."
+  },
+
+  "Homepage_describtion": {
+    "topic": "እንኩዋን ደህና መጡ",
+    "sub-topic" : "ይህ በፈረንሳይ ፓሪስ የሚገኘው የትንሳኤው ሃይል ቤተክርስትያን ድህረ ገፅ ነው።",
+    "paragraph": "ቤተክርስትያናችን የፔንቴኮስታል ቤ/ክ ስትሆን ጁን 2/2019 የተመሰረች ናት። የክርስቶስ እየሱስን ህይወትና የትንሳኤውን ሃይል መግለጥ ራእያችን ነው። አብረውን በመርሃ ግብሮቻችን ላይ በመገኘት የእግዚአብሄርን ፀጋ ይካፈሉ፣ ያካፍሉ።"
   }
+
 }

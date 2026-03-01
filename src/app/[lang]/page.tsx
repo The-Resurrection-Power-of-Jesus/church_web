@@ -85,29 +85,60 @@ export default async function Home({
       {/* Hero Section */}
       <Hero images={heroImages.length ? heroImages : ["/home1.png"]} />
       <section className="relative py-20 md:py-32 bg-transparent">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-serif text-4xl md:text-6xl font-semibold text-foreground mb-6 text-balance">
-              Welcome to Our Church
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
-              A community devoted to worship, fellowship, and growing in faith
-              together. Join us as we seek to honor God and serve one another.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
-              >
-                <Link href={`${basePath}/events`}>View Upcoming Events</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href={`${basePath}/about`}>Learn More About Us</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
+      <div className="container mx-auto px-1">
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    
+    {/* English Version */}
+    <div className="max-w-3xl mx-auto text-center lg:text-center">
+      <h1 className="font-serif text-4xl md:text-6xl font-semibold text-foreground mb-6 text-balance">
+        Welcome to Our Church
+      </h1>
+
+      <h2 className="font-serif text-xl md:text-2xl font-medium text-muted-foreground mb-4 text-balance">
+        This is the website of the Resurrection Power Church in Paris, France.
+      </h2>
+
+      <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
+        Our church is a Pentecostal church founded on June 2, 2019.
+        Our vision is to reveal the life and the resurrection power of Jesus Christ.
+        Come and share the grace of God by attending our programs with us.
+      </p>
+    </div>
+
+    {/* Amharic Version */}
+    <div className="max-w-3xl mx-auto text-center lg:text-center">
+      <h1 className="font-serif text-4xl md:text-6xl font-semibold text-foreground mb-6 text-balance">
+        እንኳን ደህና መጡ
+      </h1>
+
+      <h2 className="font-serif text-xl md:text-2xl font-medium text-muted-foreground mb-4 text-balance">
+        ይህ በፈረንሳይ ፓሪስ የሚገኘው የትንሳኤው ሃይል ቤተክርስትያን ድህረ ገፅ ነው።
+      </h2>
+
+      <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed text-pretty">
+        ቤተክርስትያናችን የፔንቴኮስታል ቤ/ክ ስትሆን ጁን 2/2019 የተመሰረች ናት።
+        የክርስቶስ እየሱስን ህይወትና የትንሳኤውን ሃይል መግለጥ ራእያችን ነው።
+        አብረውን በመርሃ ግብሮቻችን ላይ በመገኘት የእግዚአብሄርን ፀጋ ይካፈሉ፣ ያካፍሉ።
+      </p>
+    </div>
+
+  </div>
+
+  {/* Buttons Centered Below Both */}
+  <div className="flex flex-col gap-4 sm:flex-row justify-center mt-12">
+    <Button
+      asChild
+      size="lg"
+      className="bg-primary text-primary-foreground hover:bg-primary/90"
+    >
+      <Link href={`${basePath}/events`}>View Upcoming Events</Link>
+    </Button>
+
+    <Button asChild size="lg" variant="outline">
+      <Link href={`${basePath}/about`}>Learn More About Us</Link>
+    </Button>
+  </div>
+</div>
       </section>
 
       {devotional ? (
