@@ -20,6 +20,19 @@ export type Event = {
   time?: string;
   location?: string;
   image?: unknown;
+  media?: Array<
+    | {
+        _type: "image";
+        _key?: string;
+        alt?: string;
+      }
+    | {
+        _type: "youtube";
+        _key?: string;
+        url?: string;
+        title?: string;
+      }
+  >;
   recurring?: boolean;
   slug?: { current?: string };
   isPublished?: boolean;
@@ -33,6 +46,19 @@ export type EventLocalized = {
   time?: string;
   location?: string;
   image?: unknown;
+  media?: Array<
+    | {
+        _type: "image";
+        _key?: string;
+        alt?: string;
+      }
+    | {
+        _type: "youtube";
+        _key?: string;
+        url?: string;
+        title?: string;
+      }
+  >;
   recurring?: boolean;
   slug?: string;
 };
@@ -46,6 +72,7 @@ export const eventsByLocaleQuery = `*[_type == "event" && isPublished == true]
     time,
     location,
     image,
+    media,
     recurring,
     "slug": slug.current
   }`;
