@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 const siteConfig = {
-  name: "Yetinsaie Hayil Church",
+  name: "Ethiopian Protestant/Pentecostal Church in Paris",
   description:
     "A Pentecostal Ethiopian church in Paris devoted to worship, fellowship, and growing in faith together.",
   url: "https://your-project.vercel.app",
