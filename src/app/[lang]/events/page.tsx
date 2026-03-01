@@ -4,6 +4,13 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { isLocale, type Locale } from "@/i18n/config";
 import { type EventLocalized, eventsByLocaleQuery } from "@/sanity/lib/events";
 import { urlFor } from "@/sanity/lib/image";
@@ -26,6 +33,41 @@ const formatDate = (value?: string) => {
   const parsed = new Date(value);
   if (Number.isNaN(parsed.getTime())) return value;
   return format(parsed, "MMMM d, yyyy");
+};
+
+type EventMediaItem =
+  | ({
+      _type: "image";
+      _key?: string;
+      alt?: string;
+    } & Record<string, unknown>)
+  | {
+      _type: "youtube";
+      _key?: string;
+      url?: string;
+      title?: string;
+    };
+
+const getYoutubeId = (url?: string) => {
+  if (!url) return null;
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname.includes("youtu.be")) {
+      return parsed.pathname.replace("/", "");
+    }
+    if (parsed.hostname.includes("youtube.com")) {
+      const idParam = parsed.searchParams.get("v");
+      if (idParam) return idParam;
+      const pathParts = parsed.pathname.split("/").filter(Boolean);
+      const embedIndex = pathParts.indexOf("embed");
+      if (embedIndex >= 0 && pathParts[embedIndex + 1]) {
+        return pathParts[embedIndex + 1];
+      }
+    }
+  } catch {
+    return null;
+  }
+  return null;
 };
 
 export default async function EventsPage({
@@ -72,22 +114,92 @@ export default async function EventsPage({
                   >
                     <CardContent className="p-6">
                       <div className="flex flex-col md:flex-row gap-6 w-full">
-                        {/* Event Image */}
-                        {event.image ? (
-                          <div className="shrink-0 w-full md:w-80">
-                            <div className="relative w-full h-80 md:h-56 rounded-xl overflow-hidden">
-                              <Image
-                                src={urlFor(event.image)
-                                  .width(720)
-                                  .height(540)
-                                  .url()}
-                                alt={event.title || "Event image"}
-                                fill
-                                className="object-cover"
-                              />
+                        {/* Event Media */}
+                        {(() => {
+                          const mediaItems: EventMediaItem[] = event.media
+                            ?.length
+                            ? (event.media as EventMediaItem[])
+                            : event.image
+                              ? [
+                                  {
+                                    _type: "image",
+                                    _key: `fallback-${event._id}`,
+                                    ...(event.image as Record<string, unknown>),
+                                  },
+                                ]
+                              : [];
+
+                          if (mediaItems.length === 0) return null;
+
+                          return (
+                            <div className="shrink-0 w-full md:w-80">
+                              <Carousel
+                                opts={{ align: "start" }}
+                                className="relative"
+                              >
+                                <CarouselContent>
+                                  {mediaItems.map((item) => {
+                                    if (item._type === "youtube") {
+                                      const videoId = getYoutubeId(item.url);
+                                      if (!videoId) return null;
+                                      return (
+                                        <CarouselItem
+                                          key={
+                                            item._key ||
+                                            videoId ||
+                                            `youtube-${event._id}`
+                                          }
+                                        >
+                                          <div className="relative w-full h-80 md:h-56 rounded-xl overflow-hidden bg-black">
+                                            <iframe
+                                              className="absolute inset-0 h-full w-full"
+                                              src={`https://www.youtube.com/embed/${videoId}`}
+                                              title={
+                                                item.title ||
+                                                event.title ||
+                                                "YouTube video"
+                                              }
+                                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                              allowFullScreen
+                                            />
+                                          </div>
+                                        </CarouselItem>
+                                      );
+                                    }
+
+                                    const imageKey =
+                                      item._key || `image-${event._id}`;
+                                    return (
+                                      <CarouselItem key={imageKey}>
+                                        <div className="relative w-full h-80 md:h-56 rounded-xl overflow-hidden">
+                                          <Image
+                                            src={urlFor(item)
+                                              .width(720)
+                                              .height(540)
+                                              .url()}
+                                            alt={
+                                              item.alt ||
+                                              event.title ||
+                                              "Event image"
+                                            }
+                                            fill
+                                            className="object-cover"
+                                          />
+                                        </div>
+                                      </CarouselItem>
+                                    );
+                                  })}
+                                </CarouselContent>
+                                {mediaItems.length > 1 ? (
+                                  <>
+                                    <CarouselPrevious className="-left-4" />
+                                    <CarouselNext className="-right-4" />
+                                  </>
+                                ) : null}
+                              </Carousel>
                             </div>
-                          </div>
-                        ) : null}
+                          );
+                        })()}
 
                         {/* Event Content */}
                         <div className="min-w-0">
@@ -103,7 +215,7 @@ export default async function EventsPage({
                             )}
                           </div>
 
-                          <div className="mb-4 w-full line-clamp-3">
+                          <div className="mb-4 w-full line-clamp-6">
                             {event.description?.length ? (
                               <PortableText
                                 value={event.description}
