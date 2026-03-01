@@ -103,7 +103,7 @@ export default async function EventsPage({
                             )}
                           </div>
 
-                          <div className="mb-4 w-full line-clamp-3">
+                          <div className="mb-4 w-full line-clamp-6">
                             {event.description?.length ? (
                               <PortableText
                                 value={event.description}
