@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { EventDescription } from "@/components/custom/event-description";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -215,17 +216,19 @@ export default async function EventsPage({
                             )}
                           </div>
 
-                          <div className="mb-4 w-full line-clamp-6">
-                            {event.description?.length ? (
-                              <PortableText
-                                value={event.description}
-                                components={portableTextComponents}
-                              />
-                            ) : (
-                              <p className="text-muted-foreground leading-relaxed">
-                                No description available.
-                              </p>
-                            )}
+                          <div className="mb-4 w-full">
+                            <EventDescription>
+                              {event.description?.length ? (
+                                <PortableText
+                                  value={event.description}
+                                  components={portableTextComponents}
+                                />
+                              ) : (
+                                <p className="text-muted-foreground leading-relaxed">
+                                  No description available.
+                                </p>
+                              )}
+                            </EventDescription>
                           </div>
 
                           <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
