@@ -6,6 +6,7 @@ import MobileLanguageLinksClient from "@/components/custom/mobile-language-links
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetTitle,
   SheetTrigger,
@@ -81,20 +82,21 @@ export default function Header({ lang, dict }: { lang: Locale; dict: any }) {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-72">
+            <SheetContent className="w-72 px-6 pb-6">
               <SheetTitle className="sr-only">Site navigation</SheetTitle>
-              <nav className="mt-8 flex flex-col space-y-4">
+              <nav className="mt-12 flex flex-col space-y-5">
                 {navigation.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="text-lg text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {item.name}
-                  </Link>
+                  <SheetClose key={item.href} asChild>
+                    <Link
+                      href={item.href}
+                      className="pl-1 text-lg text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {item.name}
+                    </Link>
+                  </SheetClose>
                 ))}
 
-                <div className="border-t pt-6">
+                <div className="mt-2 border-t pt-6">
                   <p className="mb-3 flex items-center gap-2 text-sm font-medium">
                     <Languages className="h-4 w-4" />
                     {languageLabel}
