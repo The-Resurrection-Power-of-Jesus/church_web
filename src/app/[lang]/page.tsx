@@ -223,10 +223,10 @@ export default async function Home({
             <Card className="bg-card border-border">
               <CardContent className="p-6">
                 <h3 className="font-serif text-xl font-semibold mb-2">
-                  Thursday Prayer
+                  Wednesday Prayer
                 </h3>
                 <p className="text-muted-foreground mb-1">
-                  20:00 PM - 22:30 PM
+                  19:00 PM - 20:30 PM
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Community prayer
@@ -239,7 +239,7 @@ export default async function Home({
                   Friday Bible Study
                 </h3>
                 <p className="text-muted-foreground mb-1">
-                  20:00 PM - 22:30 PM
+                  19:30 PM - 20:30 PM
                 </p>
                 <p className="text-sm text-muted-foreground">
                   Bible study Time
