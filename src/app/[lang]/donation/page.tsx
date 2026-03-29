@@ -116,8 +116,7 @@ export default async function DonatePage({
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
                   Tithes and offerings can be placed in the offering during our
-                  Sunday worship service. Envelopes are available at the
-                  entrance for your convenience.
+                  Sunday worship service. Envelopes are available at service times.
                 </p>
               </CardContent>
             </Card>
@@ -130,6 +129,11 @@ export default async function DonatePage({
                   You can send your tithes and offerings directly via bank
                   transfer. Please contact the church office for the account
                   details.
+                  <br />
+                  Account holder: EGLISE DU PUISSANCE DE LA RESURRECTION
+                  IBAN: FR57 3000 2005 1000 0000 9192 B56
+                  BIC CRLYFRPP   
+
                 </p>
                 <Button asChild variant="outline" className="bg-transparent">
                   <Link href={`/${locale}/contact`}>Contact for Details</Link>

@@ -68,7 +68,7 @@ export default async function ContactPage({
                   <div>
                     <h3 className="mb-1 font-semibold">Email</h3>
                     <p className="text-sm text-muted-foreground">
-                      info@ethiopianchurch.org
+                      eglisederessurection@gmail.com
                     </p>
                   </div>
                 </CardContent>
