@@ -44,7 +44,7 @@ export default function Footer({ lang, dict }: { lang: Locale; dict: any }) {
             <h4 className="font-semibold mb-4">Connect With Us</h4>
             <div className="flex space-x-4">
               <Link
-                href="#"
+                href="https://www.facebook.com/PCRCParis"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <svg
@@ -59,7 +59,7 @@ export default function Footer({ lang, dict }: { lang: Locale; dict: any }) {
                 <span className="sr-only">Facebook</span>
               </Link>
               <Link
-                href="https://www.facebook.com/PCRCParis"
+                href="#"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <svg
@@ -74,7 +74,7 @@ export default function Footer({ lang, dict }: { lang: Locale; dict: any }) {
                 <span className="sr-only">Instagram</span>
               </Link>
               <Link
-                href="#"
+                href="https://www.youtube.com/@ReurrectionChurch-Paris"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <svg
@@ -89,7 +89,7 @@ export default function Footer({ lang, dict }: { lang: Locale; dict: any }) {
                 <span className="sr-only">YouTube</span>
               </Link>
               <Link
-                href="#"
+                href="https://www.tiktok.com/@ethio_church_in_paris"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <svg

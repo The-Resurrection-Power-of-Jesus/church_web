@@ -131,9 +131,10 @@ export default async function DonatePage({
                   details.
                   <br />
                   Account holder: EGLISE DU PUISSANCE DE LA RESURRECTION
+                  <br />
                   IBAN: FR57 3000 2005 1000 0000 9192 B56
-                  BIC CRLYFRPP   
-
+                  <br />
+                  BIC: CRLYFRPP
                 </p>
                 <Button asChild variant="outline" className="bg-transparent">
                   <Link href={`/${locale}/contact`}>Contact for Details</Link>
